@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perplexity_clone/theme/colors.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SideNav extends StatefulWidget {
   const SideNav({super.key});
@@ -20,32 +21,38 @@ class _SideNavState extends State<SideNav> {
       child: Column(
         spacing: 16,
         crossAxisAlignment:
-            isClicked ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+            !isClicked ? CrossAxisAlignment.center : CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 16),
           IconButton(
-            icon: CircleAvatar(
-              radius: 16,
-              backgroundColor: AppColors.cardColor,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset('assets/logo.png'),
-              ),
-            ),
+            icon: isClicked
+                ? Image.asset(
+                    'assets/logo.png',
+                    height: 24,
+                    color: AppColors.iconGrey,
+                  )
+                : CircleAvatar(
+                    radius: 16,
+                    backgroundColor: AppColors.cardColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset('assets/logo.png'),
+                    ),
+                  ),
             onPressed: () {},
           ),
           const SizedBox(height: 8),
-          buildIconButton(Icons.add, 'Add'),
-          buildIconButton(Icons.search, 'Search'),
-          buildIconButton(Icons.language, 'Language'),
-          buildIconButton(Icons.auto_awesome, 'AI'),
-          buildIconButton(Icons.cloud, 'Cloud'),
+          buildIconButton(IconsaxPlusLinear.add, 'Add'),
+          buildIconButton(IconsaxPlusLinear.search_normal, 'Search'),
+          buildIconButton(IconsaxPlusLinear.language_circle, 'Language'),
+          buildIconButton(IconsaxPlusLinear.magicpen, 'AI'),
+          buildIconButton(IconsaxPlusLinear.cloud, 'Cloud'),
           const Spacer(),
           IconButton(
             icon: Icon(
               isClicked
-                  ? Icons.keyboard_arrow_left_outlined
-                  : Icons.keyboard_arrow_right_outlined,
+                  ? IconsaxPlusLinear.arrow_left_1
+                  : IconsaxPlusLinear.arrow_right_3,
               color: AppColors.iconGrey,
             ),
             onPressed: () {
@@ -78,11 +85,17 @@ class _SideNavState extends State<SideNav> {
             Icon(icon, color: AppColors.iconGrey),
             if (isClicked) const SizedBox(width: 8),
             if (isClicked)
-              Flexible(
-                child: Text(
-                  text,
-                  style: TextStyle(color: AppColors.iconGrey),
-                  overflow: TextOverflow.ellipsis, // Prevents overflow
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                child: Flexible(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.iconGrey),
+                    overflow: TextOverflow.ellipsis, // Prevents overflow
+                  ),
                 ),
               ),
           ],

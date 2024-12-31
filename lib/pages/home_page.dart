@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perplexity_clone/widgets/search_section.dart';
 import 'package:perplexity_clone/widgets/side_nav.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,12 +8,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Row(
+      body: Row(
         children: [
           SideNav(),
           Column(
             children: [
-
+              Expanded(child: SearchSection()),
+              Container(
+                height: 40,
+              )
             ],
           )
         ],
