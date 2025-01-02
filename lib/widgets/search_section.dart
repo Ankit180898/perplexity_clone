@@ -29,16 +29,19 @@ class SearchSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: AppColors.searchBarBorder,
-                  width: 1,
+                  width: 1.5,
                 )),
             child: Column(
               spacing: 16,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 16.0),
                   child: TextField(
                       decoration: InputDecoration(
                           hintText: 'Search for anything...',
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(0),
                           hintStyle: TextStyle(
                               color: AppColors.textGrey, fontSize: 16),
                           border: InputBorder.none)),
