@@ -17,7 +17,7 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-.venv/bin/
+.venv/
 /server/venv
 /server/__pycache__/
 
