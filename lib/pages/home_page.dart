@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:perplexity_clone/theme/colors.dart';
 import 'package:perplexity_clone/widgets/search_section.dart';
@@ -11,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Row(
         children: [
-          SideNav(),
+          kIsWeb ? SideNav() : SizedBox(),
           Expanded(
             child: Column(
               children: [
