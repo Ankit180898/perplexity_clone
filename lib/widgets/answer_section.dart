@@ -62,6 +62,10 @@ As play concluded for the day, Australia stood at **311/6**, with Steve Smith ho
           ),
         ),
         Skeletonizer(
+          effect: ShimmerEffect(
+              baseColor: AppColors.footerGrey,
+              highlightColor: AppColors.iconGrey,
+              duration: Duration(milliseconds: 2000)),
           enabled: isLoading,
           child: Markdown(
             data: fullResponse,

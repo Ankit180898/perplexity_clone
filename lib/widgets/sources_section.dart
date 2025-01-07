@@ -12,6 +12,7 @@ class SourcesSection extends StatefulWidget {
 
 class _SourcesSectionState extends State<SourcesSection> {
   bool isLoading = true;
+
   List searchResults = [
     {
       'title': 'Ind vs Aus Live Score 4th Test',
@@ -65,6 +66,10 @@ class _SourcesSectionState extends State<SourcesSection> {
         const SizedBox(height: 16),
         Skeletonizer(
           enabled: isLoading,
+          effect: ShimmerEffect(
+              baseColor: AppColors.footerGrey,
+              highlightColor: AppColors.iconGrey,
+              duration: Duration(milliseconds: 2000)),
           child: Wrap(
             spacing: 16,
             runSpacing: 16,
