@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:perplexity_clone/services/chat_web_service.dart';
 import 'package:perplexity_clone/theme/colors.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SourcesSection extends StatefulWidget {
   const SourcesSection({super.key});
@@ -30,6 +31,14 @@ class _SourcesSectionState extends State<SourcesSection> {
           'https://economictimes.indiatimes.com/news/sports/ind-vs-aus-four-australian-batters-score-half-centuries-in-boxing-day-test-jasprit-bumrah-leads-indias-fightback/articleshow/116674365.cms',
     },
   ];
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   void initState() {
@@ -74,34 +83,39 @@ class _SourcesSectionState extends State<SourcesSection> {
             spacing: 16,
             runSpacing: 16,
             children: searchResults.map((res) {
-              return Container(
-                width: 150,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.cardColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      res['title'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
+              return GestureDetector(
+                onTap: () async {
+                  await _launchURL(res['url']);
+                },
+                child: Container(
+                  width: 150,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        res['title'],
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      res['url'],
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
+                      const SizedBox(height: 8),
+                      Text(
+                        res['url'],
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }).toList(),
