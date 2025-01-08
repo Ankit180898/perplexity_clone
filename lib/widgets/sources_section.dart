@@ -87,34 +87,44 @@ class _SourcesSectionState extends State<SourcesSection> {
                 onTap: () async {
                   await _launchURL(res['url']);
                 },
-                child: Container(
-                  width: 150,
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.cardColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        res['title'],
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                child: MouseRegion(
+                  onEnter: (_) => setState(() {
+                    res['hover'] = true;
+                  }),
+                  onExit: (_) => setState(() {
+                    res['hover'] = false;
+                  }),
+                  child: Container(
+                    width: 150,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: res['hover'] == true
+                          ? AppColors.searchBarBorder
+                          : AppColors.cardColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          res['title'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        res['url'],
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
+                        const SizedBox(height: 8),
+                        Text(
+                          res['url'],
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
